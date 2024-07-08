@@ -39,5 +39,6 @@ pipeline {
                 // echo "triggered test again"
                 // error 'some failure'
             }
+        }
     }
 }
