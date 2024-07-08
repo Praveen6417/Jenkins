@@ -1,6 +1,6 @@
 resource "aws_instance" "sample" {
   count = length(var.instance_names)
-  ami = var.ami_id
+  ami = data.aws_ami.ami_id.id
   vpc_security_group_ids = [aws_security_group.allow_all.id]
   instance_type = "t2.micro"
 
