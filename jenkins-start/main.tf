@@ -24,7 +24,7 @@ resource "aws_instance" "sample" {
   }
 
   provisioner "remote-exec" {
-    inline = [ "sudo mv /home/ec2-user/jenkins.repo /etc/yum.repos.d/jenkins.repo",, 
+    inline = [ "sudo mv /home/ec2-user/jenkins.repo /etc/yum.repos.d/jenkins.repo",
     "sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key", 
     "sudo yum install fontconfig java-17-openjdk -y",
     "sudo yum install jenkins -y", "sudo systemctl enable jenkins", 
