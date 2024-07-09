@@ -14,6 +14,7 @@ resource "aws_instance" "sample" {
   connection {
     type = "ssh"
     user = "ec2-user"  # Replace with the username that has sudo access
+    password = "DevOps321"
     host = self.public_ip
   }
 
@@ -23,7 +24,8 @@ resource "aws_instance" "sample" {
   }
 
   provisioner "remote-exec" {
-    inline = [ "sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo", "sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key", 
+    inline = [ "sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo", 
+    "sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key", 
     "sudo yum install fontconfig java-17-openjdk -y",
     "sudo yum install jenkins -y", "sudo systemctl enable jenkins", 
     "sudo systemctl start jenkins", "sudo systemctl daemon-reload" ]
