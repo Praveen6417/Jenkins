@@ -38,6 +38,7 @@ pipeline {
                 echo "Password: ${params.PASSWORD}"
                 echo "triggered test again"
                 echo "Hello World"
+                echo "I am Thor"
             }
         }
     }
