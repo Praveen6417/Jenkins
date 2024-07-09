@@ -11,11 +11,15 @@ resource "aws_instance" "sample" {
       }
   )
 
+}
+
+resource "null_resource" "sample" {
+  
   connection {
     type = "ssh"
-    user = "ec2-user"  # Replace with the username that has sudo access
+    user = "ec2-user"
     password = "DevOps321"
-    host = self.public_ip
+    host = aws_instance.sample[0].public_ip
   }
 
   provisioner "file" {
@@ -35,8 +39,24 @@ resource "aws_instance" "sample" {
     inline = [ "sudo yum install fontconfig java-17-openjdk -y" ]
   }
 
+  depends_on = [ aws_instance.sample[0] ]
 }
- 
+
+resource "null_resource" "sample" {
+  
+  connection {
+    type = "ssh"
+    user = "ec2-user"
+    password = "DevOps321"
+    host = aws_instance.sample[1].public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [ "sudo yum install fontconfig java-17-openjdk -y" ]
+  }
+
+  depends_on = [ aws_instance.sample[1] ]
+}
 
 resource "aws_security_group" "allow_all" {
     name= "allow_all"
