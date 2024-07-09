@@ -21,27 +21,22 @@ resource "aws_instance" "sample" {
   provisioner "file" {
     source = "jenkins.repo"
     destination = "/home/ec2-user/jenkins.repo"
-
-    when = each.value == "Jenkins-Master" ? "create" : "never"
   }
 
   
 
   provisioner "remote-exec" {
-    inline = [ "sudo mv /home/ec2-user/jenkins.repo /etc/yum.repos.d/jenkins.repo",
-    "sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo", 
+    inline = [ "sudo mv /home/ec2-user/jenkins.repo /etc/yum.repos.d/jenkins.repo",, 
     "sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key", 
     "sudo yum install fontconfig java-17-openjdk -y",
     "sudo yum install jenkins -y", "sudo systemctl enable jenkins", 
     "sudo systemctl start jenkins", "sudo systemctl daemon-reload" ]
 
-    when = each.value == "Jenkins-Master" ? "create" : "never"
+   
   }
 
   provisioner "remote-exec" {
     inline = [ "sudo yum install fontconfig java-17-openjdk -y" ]
-
-    when = each.value == "Jenkins-Node" ? "create" : "never"
   }
 
 }
