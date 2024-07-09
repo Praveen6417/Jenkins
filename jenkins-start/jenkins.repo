@@ -1,4 +1,4 @@
 [jenkins]
-name=Jenkins
-baseurl=http://pkg.jenkins.io/redhat
+name=Jenkins-stable
+baseurl=http://pkg.jenkins.io/redhat-stable
 gpgcheck=1
