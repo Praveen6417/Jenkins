@@ -13,7 +13,9 @@ resource "aws_instance" "sample" {
 
 }
 
-resource "null_resource" "sample" {
+resource "null_resource" "sample_master" {
+
+  count = 1
   
   connection {
     type = "ssh"
@@ -42,7 +44,9 @@ resource "null_resource" "sample" {
   depends_on = [ aws_instance.sample[0] ]
 }
 
-resource "null_resource" "sample" {
+resource "null_resource" "sample_node" {
+
+  count = 1
   
   connection {
     type = "ssh"
