@@ -13,11 +13,6 @@ variable instance_type{
     default = "t2.micro"
 }
 
-variable ami_id{
-    type = string
-    default = "ami-090252cbe067a9e58"
-}
-
 variable "instance_names" {
     type = list(string)
     default = ["Jenkins-Master", "Jenkins-Node"]

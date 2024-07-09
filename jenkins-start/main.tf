@@ -18,7 +18,6 @@ resource "null_resource" "sample_master" {
   count = 1
   
   connection {
-    type = "ssh"
     user = "ec2-user"
     password = "DevOps321"
     host = aws_instance.sample[0].public_ip
@@ -49,7 +48,6 @@ resource "null_resource" "sample_node" {
   count = 1
   
   connection {
-    type = "ssh"
     user = "ec2-user"
     password = "DevOps321"
     host = aws_instance.sample[1].public_ip
