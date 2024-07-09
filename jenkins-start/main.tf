@@ -22,7 +22,7 @@ resource "aws_instance" "sample" {
     source = "jenkins.repo"
     destination = "/home/ec2-user/jenkins.repo"
 
-    when = each.value == "Jenkins-Master" ? "Create" : "never"
+    when = each.value == "Jenkins-Master" ? "create" : "never"
   }
 
   
@@ -35,13 +35,13 @@ resource "aws_instance" "sample" {
     "sudo yum install jenkins -y", "sudo systemctl enable jenkins", 
     "sudo systemctl start jenkins", "sudo systemctl daemon-reload" ]
 
-    when = each.value == "Jenkins-Master" ? "Create" : "never"
+    when = each.value == "Jenkins-Master" ? "create" : "never"
   }
 
   provisioner "remote-exec" {
     inline = [ "sudo yum install fontconfig java-17-openjdk -y" ]
 
-    when = each.value == "Jenkins-Node" ? "Create" : "never"
+    when = each.value == "Jenkins-Node" ? "create" : "never"
   }
 
 }
