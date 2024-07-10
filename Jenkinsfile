@@ -37,6 +37,7 @@ pipeline {
                 echo "Choice: ${params.CHOICE}"
                 echo "Password: ${params.PASSWORD}"
                 echo "Hello World"
+                echo "Hello Thor"
                 echo "I am Thor"
             }
         }
