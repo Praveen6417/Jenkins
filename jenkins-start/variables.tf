@@ -5,7 +5,7 @@ variable "cidr_blocks" {
 
 variable ingress_port_no{
     type = number
-    default = 0
+    default = 22
 }
 
 variable instance_type{
