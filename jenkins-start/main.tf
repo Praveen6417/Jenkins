@@ -67,7 +67,7 @@ resource "aws_security_group" "allow_all" {
   ingress {
     from_port   = var.ingress_port_no
     to_port     = var.ingress_port_no
-    protocol    = "tcp"
+    protocol    = "-1"
     cidr_blocks = var.cidr_blocks
   }
 
