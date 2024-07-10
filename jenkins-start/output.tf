@@ -1,5 +1,5 @@
 output "public_ip_master" {
-  value = aws_instance.sample[0].public_io
+  value = aws_instance.sample[0].public_ip
 }
 
 output "public_ip_node" {
