@@ -38,6 +38,7 @@ pipeline {
                 echo "Password: ${params.PASSWORD}"
                 echo "triggered test again"
                 echo "I am Thor, King of Asgard"
+                echo "I am BlackPanther, King of Wakanda"
             }
         }
     }
