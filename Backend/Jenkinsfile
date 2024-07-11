@@ -23,7 +23,7 @@ pipeline {
 
             }
         }
-        stage('Deploy')
+        stage('Deploy'){
             steps {
 
             }
@@ -47,7 +47,6 @@ pipeline {
             echo 'I will run when pipeline is failure'
         }
 
-        }
-    
     }
-
+    
+}
