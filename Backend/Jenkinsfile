@@ -1,0 +1,68 @@
+pipeline {
+    agent {
+        label 'Agent - 1'
+    }
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
+        ansiColor('xterm')
+    }
+    // parameters{
+    //     choice(name: 'CHOICE', choices: ['plan','apply','destroy'], description: 'Pick something')
+    // }
+    stages {
+        stage('init') {
+            steps {
+                dir('terraform-infra-dev/01-vpc'){
+                sh """
+                ls -ltr
+                terraform init"""
+                 }
+            }
+        }
+        stage('Plan') {
+            steps {
+                dir('terraform-infra-dev/01-vpc'){
+                sh """
+                ls -ltr
+                """
+                sh " terraform plan"
+                }
+            }
+        }
+        stage('Deploy') {
+            input{
+                message "Should we continue?"
+                ok "yes, continue"
+            }
+            steps {
+                sh """
+                terraform apply -auto-approve
+                """
+            }
+        }
+        stage('Destroy') {
+            steps {
+                sh """
+                terraform destroy -auto-approve
+                """
+            }
+        }
+    }
+
+    post { 
+        always { 
+            echo 'I will always say Hello again!'
+            deleteDir()
+        }
+        success { 
+            echo 'I will run when pipeline is success'
+        }
+        failure { 
+            echo 'I will run when pipeline is failure'
+        }
+
+        }
+    
+    }
+
