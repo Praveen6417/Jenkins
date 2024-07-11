@@ -10,6 +10,9 @@ pipeline {
     // parameters{
     //     choice(name: 'CHOICE', choices: ['plan','apply','destroy'], description: 'Pick something')
     // }
+    environment {
+        def version = ' '
+    }
     stages {
         stage('init') {
             steps {
@@ -18,11 +21,16 @@ pipeline {
                 } 
             }
         }
-        // stage('Plan') {
-        //     steps {
-
-        //     }
-        // }
+        stage('Version') {
+            steps {
+                script {
+                    def packageJson = readFile('package.json')
+                    def packageData = readJSON text: packageJson
+                    version = packageData.version
+                    echo "Application Version = $version"
+                }
+            }
+        }
         // stage('Deploy'){
         //     steps {
 
