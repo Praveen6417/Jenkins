@@ -57,7 +57,10 @@ resource "null_resource" "sample_node" {
     inline = [ "sudo yum install fontconfig java-17-openjdk -y", 
     "sudo yum install -y yum-utils", 
     "sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo",
-    "sudo yum -y install terraform" ]
+    "sudo yum -y install terraform",
+    "sudo dnf module disable nodejs -y",
+    "sudo dnf module enable nodejs:20 -y",
+    "sudo dnf install nodejs -y" ]
   }
 
   depends_on = [ aws_instance.sample[1] ]
