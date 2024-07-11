@@ -35,6 +35,7 @@ pipeline {
                         def packageJson = readJSON file: 'package.json'
                         version = packageJson.version
                         echo "Application Version = $version"
+                        sh "ls -ltr"
                     }
                 }
             }
