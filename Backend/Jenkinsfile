@@ -18,21 +18,21 @@ pipeline {
                 } 
             }
         }
-        stage('Plan') {
-            steps {
+        // stage('Plan') {
+        //     steps {
 
-            }
-        }
-        stage('Deploy'){
-            steps {
+        //     }
+        // }
+        // stage('Deploy'){
+        //     steps {
 
-            }
-        }
-        stage('Destroy') {
-            steps {
+        //     }
+        // }
+        // stage('Destroy') {
+        //     steps {
 
-            }
-        }
+        //     }
+        // }
     }
 
     post { 
