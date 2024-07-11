@@ -13,39 +13,24 @@ pipeline {
     stages {
         stage('init') {
             steps {
-                dir('terraform-infra-dev/01-vpc'){
-                sh """
-                ls -ltr
-                terraform init"""
-                 }
+                dir('Backend'){
+                sh """ ls -ltr """
+                } 
             }
         }
         stage('Plan') {
             steps {
-                dir('terraform-infra-dev/01-vpc'){
-                sh """
-                ls -ltr
-                """
-                sh " terraform plan"
-                }
+
             }
         }
-        stage('Deploy') {
-            input{
-                message "Should we continue?"
-                ok "yes, continue"
-            }
+        stage('Deploy')
             steps {
-                sh """
-                terraform apply -auto-approve
-                """
+
             }
         }
         stage('Destroy') {
             steps {
-                sh """
-                terraform destroy -auto-approve
-                """
+
             }
         }
     }
@@ -53,7 +38,7 @@ pipeline {
     post { 
         always { 
             echo 'I will always say Hello again!'
-            deleteDir()
+            // deleteDir()
         }
         success { 
             echo 'I will run when pipeline is success'
