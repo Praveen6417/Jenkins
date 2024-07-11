@@ -40,6 +40,13 @@ pipeline {
                 }
             }
         }
+        stage('Build') {
+            steps {
+                dir('Backend'){
+                sh """ zip -r Backend-$version * -x Jenkinsfile """
+                } 
+            }
+        }
         // stage('Deploy'){
         //     steps {
 
