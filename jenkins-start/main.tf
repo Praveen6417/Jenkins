@@ -1,4 +1,4 @@
-resource "aws_instance" "sample" {
+resource "aws_instance" "jenkins" {
   count = length(var.instance_names)
   ami = data.aws_ami.ami_id.id
   vpc_security_group_ids = [aws_security_group.allow_all.id]
@@ -13,14 +13,39 @@ resource "aws_instance" "sample" {
 
 }
 
-resource "null_resource" "sample_master" {
+resource "aws_key_pair" "tools" {
+  key_name = "tools"
+  public_key = file("~/.ssh/tools")
+}
+
+module "nexus" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+
+  name = "nexus"
+
+  instance_type          = "t3.medium"
+  vpc_security_group_ids = [aws_security_group.allow_all.id]
+  ami = data.aws_ami.ami_id_Nexus.id
+  key_name = aws_key_pair.tools.key_name
+  root_block_device = [
+    {
+      volume_type = "gp3"
+      volume_size = 30
+    }
+  ]
+  tags = {
+    Name = "nexus"
+  }
+}
+
+resource "null_resource" "jenkins_master" {
 
   count = 1
   
   connection {
     user = "ec2-user"
     password = "DevOps321"
-    host = aws_instance.sample[0].public_ip
+    host = aws_instance.jenkins[0].public_ip
   }
 
   provisioner "file" {
@@ -40,17 +65,17 @@ resource "null_resource" "sample_master" {
     inline = [ "sudo yum install fontconfig java-17-openjdk -y" ]
   }
 
-  depends_on = [ aws_instance.sample[0] ]
+  depends_on = [ aws_instance.jenkins[0] ]
 }
 
-resource "null_resource" "sample_node" {
+resource "null_resource" "jenkins_node" {
 
   count = 1
   
   connection {
     user = "ec2-user"
     password = "DevOps321"
-    host = aws_instance.sample[1].public_ip
+    host = aws_instance.jenkins[1].public_ip
   }
 
   provisioner "remote-exec" {
@@ -63,7 +88,7 @@ resource "null_resource" "sample_node" {
     "sudo dnf install nodejs -y" ]
   }
 
-  depends_on = [ aws_instance.sample[1] ]
+  depends_on = [ aws_instance.jenkins[1] ]
 }
 
 resource "aws_security_group" "allow_all" {
