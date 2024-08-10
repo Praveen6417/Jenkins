@@ -13,30 +13,30 @@ resource "aws_instance" "jenkins" {
 
 }
 
-resource "aws_key_pair" "tools" {
-  key_name = "tools"
-  public_key = file("~/.ssh/tools.pub")
-}
+# resource "aws_key_pair" "tools" {
+#   key_name = "tools"
+#   public_key = file("~/.ssh/tools.pub")
+# }
 
-module "nexus" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
+# module "nexus" {
+#   source  = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "nexus"
+#   name = "nexus"
 
-  instance_type          = "t3.medium"
-  vpc_security_group_ids = [aws_security_group.allow_all.id]
-  ami = data.aws_ami.ami_id_Nexus.id
-  key_name = aws_key_pair.tools.key_name
-  root_block_device = [
-    {
-      volume_type = "gp3"
-      volume_size = 30
-    }
-  ]
-  tags = {
-    Name = "nexus"
-  }
-}
+#   instance_type          = "t3.medium"
+#   vpc_security_group_ids = [aws_security_group.allow_all.id]
+#   ami = data.aws_ami.ami_id_Nexus.id
+#   key_name = aws_key_pair.tools.key_name
+#   root_block_device = [
+#     {
+#       volume_type = "gp3"
+#       volume_size = 30
+#     }
+#   ]
+#   tags = {
+#     Name = "nexus"
+#   }
+# }
 
 resource "null_resource" "jenkins_master" {
 
@@ -80,6 +80,18 @@ resource "null_resource" "jenkins_node" {
 
   provisioner "remote-exec" {
     inline = [ "sudo yum install fontconfig java-17-openjdk -y",
+    # Download Terraform
+    "wget https://releases.hashicorp.com/terraform/1.5.3/terraform_1.5.3_linux_amd64.zip",
+
+    # Unzip the downloaded package
+    "unzip terraform_1.5.3_linux_amd64.zip",
+
+    # Move the terraform binary to /usr/local/bin
+    "sudo mv terraform /usr/local/bin/",
+
+    # Verify the installation
+    "terraform version",
+
     "sudo dnf module disable nodejs -y",
     "sudo dnf module enable nodejs:20 -y",
     "sudo dnf install nodejs -y" ]
