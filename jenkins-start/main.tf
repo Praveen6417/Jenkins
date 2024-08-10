@@ -70,9 +70,11 @@ resource "null_resource" "jenkins_master" {
 }
 
 resource "null_resource" "jenkins_node" {
-
-  count = 1
   
+triggers = {
+  instance_id = aws_instance.jenkins[1]
+}
+
   connection {
     user = "ec2-user"
     password = "DevOps321"
