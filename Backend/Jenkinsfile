@@ -43,7 +43,10 @@ pipeline {
         stage('Build') {
             steps {
                 dir('Backend'){
-                sh """ zip -r Backend-$version * -x Jenkinsfile """
+                sh """ 
+                zip -r Backend-$version * -x Jenkinsfile 
+                ls -ltr
+                """
                 } 
             }
         }
