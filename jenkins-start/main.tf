@@ -46,7 +46,7 @@ resource "null_resource" "jenkins_master" {
     user = "ec2-user"
     password = "DevOps321"
     type = "ssh"
-    host = aws_instance.jenkins[0].private_ip
+    host = aws_instance.jenkins[0].public_ip
   }
 
   provisioner "file" {
@@ -77,7 +77,7 @@ resource "null_resource" "jenkins_node" {
     user = "ec2-user"
     password = "DevOps321"
     type = "ssh"
-    host = aws_instance.jenkins[1].private_ip
+    host = aws_instance.jenkins[1].public_ip
   }
 
   provisioner "remote-exec" {
