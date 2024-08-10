@@ -72,7 +72,7 @@ resource "null_resource" "jenkins_master" {
 resource "null_resource" "jenkins_node" {
   
 triggers = {
-  instance_id = aws_instance.jenkins[1]
+  instance_id = aws_instance.jenkins[1].id
 }
 
   connection {
