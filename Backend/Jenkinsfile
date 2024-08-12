@@ -44,7 +44,7 @@ pipeline {
             steps {
                 dir('Backend'){
                 sh """ 
-                zip -q -r Backend-$version * -x Jenkinsfile 
+                zip -q -r Backend-${version}.zip * -x Jenkinsfile 
                 ls -ltr
                 """
                 } 
