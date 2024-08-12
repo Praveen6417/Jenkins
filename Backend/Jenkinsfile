@@ -74,11 +74,16 @@ pipeline {
                 }
             }
         }
-        // stage('Destroy') {
-        //     steps {
-
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                script{
+                    def values = [
+                        string(name: 'version', value: ${version})
+                    ]
+                    build job: 'backend-deploy' parameters: values, wait: false
+                }
+            }
+        }
     }
 
     post { 
