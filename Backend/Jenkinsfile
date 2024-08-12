@@ -79,7 +79,7 @@ pipeline {
                 dir('Backend')
                 script{
                     def values = [
-                        string(name: 'version', value: ${version})
+                        string(name: 'version', value: "${version}")
                     ]
                     build job: 'backend-deploy', parameters: values, wait: false
                 }
