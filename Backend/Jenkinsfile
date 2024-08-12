@@ -80,7 +80,7 @@ pipeline {
                     def values = [
                         string(name: 'version', value: ${version})
                     ]
-                    build job: 'backend-deploy' parameters: values, wait: false
+                    build job: 'backend-deploy', parameters: values, wait: false
                 }
             }
         }
