@@ -16,16 +16,16 @@ pipeline {
                 echo "Application Version: ${params.version}"
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         sh 'echo Hello World, from Test'
-        //     }
-        // }
-        // stage('Deploy') {
-        //     steps {
-        //         sh 'echo Hello World, from Deploy'
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                sh 'echo Hello World, from Test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo Hello World, from Deploy'
+            }
+        }
     }
 
     post { 
