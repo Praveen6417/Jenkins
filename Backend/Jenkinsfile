@@ -53,23 +53,24 @@ pipeline {
         stage('Nexus-Artifact-Uploader'){
             steps {
                 dir('Backend'){
-                    script{
-                         nexusArtifactUploader(
-                            nexusVersion: 'nexus3',
-                            protocol: 'http',
-                            nexusUrl: '54.91.202.72:8081',
-                            groupId: 'com.expense',
-                            version: "${version}",
-                            repository: "backend",
-                            credentialsId: 'nexus-auth',
-                            artifacts: [
-                                [artifactId: 'Backend',
-                                classifier: '',
-                                file: 'Backend-' + "${version}" + '.zip',
-                                type: 'zip']
-                            ]
-                        )
-                    }
+                    sh " ls -ltr"
+                    // script{
+                    //      nexusArtifactUploader(
+                    //         nexusVersion: 'nexus3',
+                    //         protocol: 'http',
+                    //         nexusUrl: '54.91.202.72:8081',
+                    //         groupId: 'com.expense',
+                    //         version: "${version}",
+                    //         repository: "backend",
+                    //         credentialsId: 'nexus-auth',
+                    //         artifacts: [
+                    //             [artifactId: 'Backend',
+                    //             classifier: '',
+                    //             file: 'Backend-' + "${version}" + '.zip',
+                    //             type: 'zip']
+                    //         ]
+                    //     )
+                    // }
                 }
             }
         }
