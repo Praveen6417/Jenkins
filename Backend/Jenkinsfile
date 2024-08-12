@@ -50,11 +50,29 @@ pipeline {
                 } 
             }
         }
-        // stage('Deploy'){
-        //     steps {
-
-        //     }
-        // }
+        stage('Nexus-Artifact-Uploader'){
+            steps {
+                dir('Backend'){
+                    script{
+                         nexusArtifactUploader(
+                            nexusVersion: 'nexus3',
+                            protocol: 'http',
+                            nexusUrl: '54.91.202.72:8081',
+                            groupId: 'com.expense',
+                            version: "${version}",
+                            repository: "backend",
+                            credentialsId: 'nexus-auth',
+                            artifacts: [
+                                [artifactId: 'backend',
+                                classifier: '',
+                                file: 'backend-' + "${version}" + '.zip',
+                                type: 'zip']
+                            ]
+                        )
+                    }
+                }
+            }
+        }
         // stage('Destroy') {
         //     steps {
 
