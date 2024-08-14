@@ -19,7 +19,11 @@ pipeline {
         stage('Init') {
             steps {
                 dir('backend-deploy'){
-                    sh "ls -ltr"
+                    sh """
+                    echo "Changing directory to terraform"
+                    cd terraform
+                    ls -ltr
+                    """
                 }
             }    
         }
