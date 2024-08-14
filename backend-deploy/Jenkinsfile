@@ -22,7 +22,7 @@ pipeline {
                     sh """
                     echo "Changing directory to terraform"
                     cd terraform
-                    ls -ltr
+                    terraform init
                     """
                 }
             }    
