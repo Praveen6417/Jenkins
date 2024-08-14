@@ -8,7 +8,7 @@ pipeline {
         ansiColor('xterm') 
     }
     parameters {
-        string(name: 'version', defaultValue: '1.0.0', description:'What is the Application Version' )
+        string(name: 'version', defaultValue: '1.1.0', description:'What is the Application Version' )
     }
     stages {
         stage('Version') {
