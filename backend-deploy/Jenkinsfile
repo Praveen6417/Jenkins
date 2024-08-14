@@ -18,9 +18,7 @@ pipeline {
         }
         stage('Init') {
             steps {
-                dir("terraform"){
-                    sh "ls -ltr"
-                }
+                sh "pwd"
             }    
         }
         stage('Deploy') {
