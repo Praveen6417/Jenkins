@@ -33,7 +33,7 @@ pipeline {
                     sh """
                     echo "Changing directory to terraform"
                     cd terraform
-                    terraform plan
+                    terraform plan -var="version= ${params.version}"
                     """
                 }
             }
