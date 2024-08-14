@@ -27,9 +27,15 @@ pipeline {
                 }
             }    
         }
-        stage('Deploy') {
+        stage('Plan') {
             steps {
-                sh 'echo Hello World, from Deploy'
+                dir('backend-deploy'){
+                    sh """
+                    echo "Changing directory to terraform"
+                    cd terraform
+                    terraform plan
+                    """
+                }
             }
         }
     }
