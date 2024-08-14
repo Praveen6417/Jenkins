@@ -18,7 +18,10 @@ pipeline {
         }
         stage('Init') {
             steps {
-                sh "pwd"
+                sh """
+                pwd
+                ls -ltr
+                """
             }    
         }
         stage('Deploy') {
