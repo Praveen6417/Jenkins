@@ -21,6 +21,8 @@ pipeline {
                 sh """
                 pwd
                 ls -ltr
+                cd backend-deploy
+                ls -ltr
                 """
             }    
         }
