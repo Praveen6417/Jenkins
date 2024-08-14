@@ -16,10 +16,12 @@ pipeline {
                 echo "Application Version: ${params.version}"
             }
         }
-        stage('Test') {
+        stage('Init') {
             steps {
-                sh 'echo Hello World, from Test'
-            }
+                dir("terraform"){
+                    sh "ls -ltr"
+                }
+            }    
         }
         stage('Deploy') {
             steps {
