@@ -18,12 +18,9 @@ pipeline {
         }
         stage('Init') {
             steps {
-                sh """
-                pwd
-                ls -ltr
-                cd backend-deploy
-                ls -ltr
-                """
+                dir('backend-deploy'){
+                    sh "ls -ltr"
+                }
             }    
         }
         stage('Deploy') {
